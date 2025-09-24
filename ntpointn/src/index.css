@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.stylish {
+    font-family: "Stylish", sans-serif;
+}
