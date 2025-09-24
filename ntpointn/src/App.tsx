@@ -33,12 +33,6 @@ export default function App() {
     toast,
   } = state;
 
-  let playCount = 0;
-  useEffect(() => {
-    playCount++;
-    console.log(playCount);
-  }, [isRunning]);
-
   const THEME_KEY = "npn:theme"; // "dark" | "light"
 
   function getInitialDark(): boolean {
@@ -63,7 +57,7 @@ export default function App() {
     <div className={`${isDark ? "dark" : ""} ${baseClasses}`}>
       <div className="w-full max-w-xl space-y-6">
         <header className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold dark:text-slate-100 stylish">19point9</h1>
+          <h1 className="text-2xl font-bold dark:text-slate-100 stylish">19<span className="text-violet-900/90 dark:text-violet-300">point</span>9</h1>
           <div className="text-sm opacity-70 dark:text-slate-100">
             It's tappin' time
           </div>

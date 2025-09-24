@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { fmt1 } from "../hooks/useNineteenPointNine";
 import copyShareText from "../utils/share";
 import { Toast } from "./Toast";
@@ -16,9 +17,13 @@ export function TargetsPills({
   startTs,
   canTap,
 }: Props) {
+  const [isToastVisible, setIsToastVisible] = useState(false);
+  const [message, setMessage ]= useState("");
   async function handleShareText() {
     const result = await copyShareText(targets.length, fmt1(total));
-    <Toast message={result} />;
+    setMessage(result);
+    setIsToastVisible(true);
+    setTimeout(() => setIsToastVisible(false), 3000);
   }
 
   return (
@@ -39,14 +44,17 @@ export function TargetsPills({
           </span>
         ))}
       </div>
-      {startTs !== null && !canTap &&
-      <button
-        className="w-full mt-6 bg-violet-800 text-slate-100 rounded py-1 px-2 dark:bg-violet-400 dark:text-gray-900 cursor-pointer hover:bg-violet-700 dark:hover:bg-violet-500"
-        onClick={handleShareText}
-      >
-        Share
-      </button>
-      }
+      <div>
+        {isToastVisible && <Toast message={message} />}
+        {startTs !== null && !canTap &&
+        <button
+          className="w-full mt-6 bg-violet-800 text-slate-100 rounded py-1 px-2 dark:bg-violet-400 dark:text-gray-900 cursor-pointer hover:bg-violet-700 dark:hover:bg-violet-500"
+          onClick={handleShareText}
+        >
+          Share
+        </button>
+        }
+      </div>
       
     </>
   );
